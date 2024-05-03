@@ -3,7 +3,7 @@ package org.example.eventmanagementsystem.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @Table(name = "event")
