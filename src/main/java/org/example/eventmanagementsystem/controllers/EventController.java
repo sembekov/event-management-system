@@ -23,8 +23,8 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EventResponse>> getAllEvents(Pageable pageable) {
-        List<EventResponse> events = eventService.getAllEvents(pageable).getContent();
+    public ResponseEntity<List<EventResponse>> getAllEvents() {
+        List<EventResponse> events = eventService.getAllEvents();
         return ResponseEntity.ok(events);
     }
 

@@ -15,7 +15,7 @@ public class ParticipantResponse {
     @JsonProperty("last_name")
     private String lastName;
 
-    @JsonProperty("participant_id")
+    @JsonProperty("username")
     private String username;
 
     @JsonProperty("password")

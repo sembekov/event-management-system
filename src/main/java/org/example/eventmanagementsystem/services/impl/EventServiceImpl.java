@@ -7,10 +7,10 @@ import org.example.eventmanagementsystem.entities.City;
 import org.example.eventmanagementsystem.entities.Event;
 import org.example.eventmanagementsystem.repositories.EventRepository;
 import org.example.eventmanagementsystem.services.EventService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.sql.Date;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +30,23 @@ public class EventServiceImpl implements EventService {
         return mapToResponse(savedEvent);
     }
 
-    @Override
-    public Page<EventResponse> getAllEvents(Pageable pageable) {
-        return eventRepository.findAll(pageable).map(this::mapToResponse);
+    public List<EventResponse> getAllEvents() {
+        List<Event> events = eventRepository.findAll();
+        return events.stream()
+                .map(this::mapToEventResponse)  // Конвертация из сущности в DTO
+                .collect(Collectors.toList());
     }
+
+    private EventResponse mapToEventResponse(Event event) {
+        EventResponse response = new EventResponse();
+        response.setEventId(event.getId());
+        response.setEventName(event.getEventName());
+        response.setEventAuthor(event.getEventAuthor());
+        response.setEventTime(event.getEventTime());
+        response.setLocation(event.getLocation());
+        return response;
+    }
+
 
     @Override
     public EventResponse getEventById(Long eventId) {
