@@ -1,41 +1,54 @@
 package org.example.eventmanagementsystem.controllers;
 
-import lombok.RequiredArgsConstructor;
-import org.example.eventmanagementsystem.dto.request.ParticipantRequest;
-import org.example.eventmanagementsystem.dto.response.ParticipantResponse;
-import org.example.eventmanagementsystem.services.ParticipantService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.example.eventmanagementsystem.entities.Participant;
+import org.example.eventmanagementsystem.services.ParticipantService;
+import org.example.eventmanagementsystem.dto.response.ParticipantResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RestController
 @RequestMapping("/api/participants")
-@RequiredArgsConstructor
 public class ParticipantController {
+
     private final ParticipantService participantService;
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public ParticipantController(ParticipantService participantService, PasswordEncoder passwordEncoder) {
+        this.participantService = participantService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @PostMapping("/add-participant")
-    public ResponseEntity<ParticipantResponse> createParticipant(@RequestBody ParticipantRequest participantRequestDTO) {
-        ParticipantResponse newParticipant = participantService.createParticipant(participantRequestDTO);
-        return ResponseEntity.status(201).body(newParticipant);
-    }
+    public ResponseEntity<ParticipantResponse> addParticipant(
+            @RequestPart("firstName") String firstName,
+            @RequestPart("lastName") String lastName,
+            @RequestPart("email") String email,
+            @RequestPart("password") String password) {
 
-    @GetMapping
-    public ResponseEntity<List<ParticipantResponse>> getAllParticipants() {
-        List<ParticipantResponse> participants = participantService.getAllParticipants();
-        return ResponseEntity.ok(participants);
-    }
+        boolean participantExists = participantService.existsByEmail(email);
+        if (participantExists) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ParticipantResponse> getParticipantById(@PathVariable("id") Long participantId) {
-        ParticipantResponse participant = participantService.getParticipantById(participantId);
-        return ResponseEntity.ok(participant);
-    }
+        Participant newParticipant = new Participant();
+        newParticipant.setFirstName(firstName);
+        newParticipant.setLastName(lastName);
+        newParticipant.setEmail(email);
+        newParticipant.setUsername(email);
+        newParticipant.setPassword(passwordEncoder.encode(password));
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteParticipant(@PathVariable("id") Long participantId) {
-        participantService.deleteParticipant(participantId);
-        return ResponseEntity.noContent().build();
+        Participant savedParticipant = participantService.save(newParticipant);
+
+        ParticipantResponse response = new ParticipantResponse();
+        response.setParticipantId(savedParticipant.getId());
+        response.setFirstName(savedParticipant.getFirstName());
+        response.setLastName(savedParticipant.getLastName());
+        response.setEmail(savedParticipant.getEmail());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

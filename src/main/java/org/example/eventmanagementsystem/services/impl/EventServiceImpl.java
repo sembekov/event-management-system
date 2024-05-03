@@ -24,7 +24,7 @@ public class EventServiceImpl implements EventService {
         event.setEventAuthor(eventRequestDTO.getEventAuthor());
         event.setEventTime(eventRequestDTO.getEventTime());
         event.setLocation(eventRequestDTO.getLocation());
-        event.setCity(new City());  // это можно улучшить, используя CityService
+        event.setCity(new City());
 
         Event savedEvent = eventRepository.save(event);
         return mapToResponse(savedEvent);
@@ -33,7 +33,7 @@ public class EventServiceImpl implements EventService {
     public List<EventResponse> getAllEvents() {
         List<Event> events = eventRepository.findAll();
         return events.stream()
-                .map(this::mapToEventResponse)  // Конвертация из сущности в DTO
+                .map(this::mapToEventResponse)
                 .collect(Collectors.toList());
     }
 
