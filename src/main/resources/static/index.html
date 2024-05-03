@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Event Management</title>
-		<link rel="stylesheet" href=style/main.css>
-	</head>
-	<body>
-		<div class="container">
-			<h1>Welcome to the Event Management System</h1>
-			<p>Find and register for upcoming events in your city!</p>
+<head>
+	<meta charset="UTF-8">
+	<title>Event Management System</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="script.js"></script>
+</head>
+<body>
+<nav>
+	<ul>
+		<li><a href="index.html">Home</a></li>
+		<li><a href="events.html">Events</a></li>
+		<li><a href="register.html">Register</a></li>
+	</ul>
+</nav>
 
-			<ul class="event-list">
-				<li>Concert - June 1, 2024</li>
-				<li>Marathon - June 5, 2024</li>
-				<li>Tech Conference - June 10, 2024</li>
-			</ul>
-		</div>
-	</body>
+<h1>Welcome to the Event Management System</h1>
+<p>Find and register for upcoming events in your city!</p>
+
+<button onclick="navigate('events.html')">View Events</button>
+<button onclick="navigate('register.html')">Register</button>
+</body>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
+</nav>
+
+<h1>Register for an Event</h1>
+<form id="registration-form" onsubmit="handleRegistration(event)">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br><br>
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    function handleRegistration(event) {
+        event.preventDefault();
+        const form = document.getElementById('registration-form');
+        const formData = new FormData(form);
+
+        fetch('/api/register', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Registration successful!");
+                    navigate('events.html');
+                } else {
+                    alert("Registration failed: " + data.message);
+                }
+            })
+            .catch(error => console.error('Error during registration:', error));
+    }
+</script>
+</body>
+</html>
