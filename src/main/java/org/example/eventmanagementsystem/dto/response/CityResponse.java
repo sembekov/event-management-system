@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class CityResponse {
     @JsonProperty("city_id")
     private Long cityId;

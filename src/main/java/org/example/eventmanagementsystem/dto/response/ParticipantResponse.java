@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class ParticipantResponse {
     @JsonProperty("participant_id")
     private Long participantId;

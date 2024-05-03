@@ -7,7 +7,6 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-@Builder
 public class EventResponse {
     @JsonProperty("event_id")
     private Long eventId;
