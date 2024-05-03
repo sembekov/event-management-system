@@ -4,23 +4,23 @@ function navigate(page) {
 
 function fetchEvents() {
     fetch('/api/events')
-        .then(response => response.json())
-        .then(events => {
+        .then((response) => response.json())
+        .then((events) => {
             const eventsList = document.getElementById('events-list');
-            eventsList.innerHTML = '';
-            events.forEach(event => {
+            eventsList.innerHTML = ''; // Очистка содержимого
+            events.forEach((event) => {
                 const eventDiv = document.createElement('div');
                 eventDiv.className = 'event';
                 eventDiv.innerHTML = `
-                    <h2>${event.name}</h2>
+                    <h2>${event.eventName}</h2>
                     <p>Location: ${event.location}</p>
-                    <p>Date: ${event.date}</p>
-                    <button onclick="navigate('event.html?id=${event.id}')">More Details</button>
+                    <p>Date: ${event.eventTime}</p>
+                    <button onclick="navigate('event-details.html?id=${event.eventId}')">More Details</button>
                 `;
                 eventsList.appendChild(eventDiv);
             });
         })
-        .catch(error => console.error('Error fetching events:', error));
+        .catch((error) => console.error('Error fetching events:', error));
 }
 
 function fetchEventDetails() {
@@ -29,18 +29,17 @@ function fetchEventDetails() {
 
     if (eventId) {
         fetch(`/api/events/${eventId}`)
-            .then(response => response.json())
-            .then(event => {
+            .then((response) => response.json())
+            .then((event) => {
                 const eventDetails = document.getElementById('event-details');
                 eventDetails.innerHTML = `
-                    <h2>${event.name}</h2>
+                    <h2>${event.eventName}</h2>
                     <p>Location: ${event.location}</p>
-                    <p>Date: ${event.date}</p>
+                    <p>Date: ${event.eventTime}</p>
                     <p>Description: ${event.description}</p>
-                    <button onclick="registerForEvent()">Register for this Event</button>
                 `;
             })
-            .catch(error => console.error('Error fetching event details:', error));
+            .catch((error) => console.error('Error fetching event details:', error));
     } else {
         console.error('Event ID not found');
     }

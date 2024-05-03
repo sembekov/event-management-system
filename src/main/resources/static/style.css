@@ -48,3 +48,7 @@ button:hover {
     border: 1px solid #ddd;
     padding: 20px;
 }
+
+.error-message {
+    color: red;
+}
