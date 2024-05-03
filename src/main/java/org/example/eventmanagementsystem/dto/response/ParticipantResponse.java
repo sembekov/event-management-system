@@ -1,0 +1,27 @@
+package org.example.eventmanagementsystem.dto.response;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class ParticipantResponse {
+    @JsonProperty("participant_id")
+    private Long participantId;
+
+    @JsonProperty("first_name")
+    private String firstName;
+
+    @JsonProperty("last_name")
+    private String lastName;
+
+    @JsonProperty("participant_id")
+    private String username;
+
+    @JsonProperty("password")
+    private String password;
+
+    @JsonProperty("ticket_id")
+    private Long ticketId;
+}
