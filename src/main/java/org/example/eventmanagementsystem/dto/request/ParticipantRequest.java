@@ -17,6 +17,9 @@ public class ParticipantRequest {
     @JsonProperty("password")
     private String password;
 
+    @JsonProperty("email")
+    private String email;
+
     @JsonProperty("ticket_id")
     private long ticketId;
 }
