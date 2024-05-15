@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.example</groupId>
-    <artifactId>event-management-system</artifactId>
+    <artifactId>event-manager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>event-management-system</name>
     <description>event-management-system</description>
@@ -64,7 +64,6 @@
             <artifactId>spring-security-core</artifactId>
             <version>6.2.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
