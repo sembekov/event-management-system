@@ -1,5 +1,5 @@
 # Event Manager
-This is a web-based project called Event Management System. It allows users to view upcoming events, register for events, and manage their own profile.
+This is a web-based project called Event Manager. It allows users to view upcoming events, register for events, and manage their own profile.
 
 ## Dependencies
 * Java 21
