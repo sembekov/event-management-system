@@ -1,4 +1,4 @@
-# Event Management System
+# Event Manager
 This is a web-based project called Event Management System. It allows users to view upcoming events, register for events, and manage their own profile.
 
 ## Dependencies
@@ -17,8 +17,8 @@ This is a web-based project called Event Management System. It allows users to v
 ## Installation
 1. Clone the repository
    ```bash
-   git clone https://github.com/sembekov/event-management-system.git
-   cd event-management-system
+   git clone https://github.com/sembekov/event-manager.git
+   cd event-manager
    ```
 2. Make sure that Docker is running and build the container
    ```bash

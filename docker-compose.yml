@@ -5,14 +5,14 @@ services:
     environment:
       POSTGRES_USER: sayat
       POSTGRES_PASSWORD: 12345678
-      POSTGRES_DB: event_management_system
+      POSTGRES_DB: event_manager
     ports:
       - "5433:5432"
 
   app:
     build: .
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/event_management_system
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/event_manager
       SPRING_DATASOURCE_USERNAME: sayat
       SPRING_DATASOURCE_PASSWORD: 12345678
     ports:
